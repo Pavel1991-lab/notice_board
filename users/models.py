@@ -4,49 +4,10 @@ from django.db import models
 # Менеджер должен быть унаследован от следующего класса
 from django.contrib.auth.models import BaseUserManager
 
+from users.manegement import UserManager
+
 
 # Менеджер должен содержать как минимум две следующие функции
-class UserManager(BaseUserManager):
-    """
-    функция создания пользователя — в нее мы передаем обязательные поля
-    """
-
-    def create_user(self, email, first_name, last_name, phone, role="user", password=None):
-        if not email:
-            raise ValueError('Users must have an email address')
-        user = self.model(
-            email=self.normalize_email(email),
-            first_name=first_name,
-            last_name=last_name,
-            phone=phone,
-            role=role
-        )
-        user.is_active = True
-        user.set_password(password)
-        user.save(using=self._db)
-
-        return user
-
-    def create_superuser(self, email, first_name, last_name, phone, role='admin', password=None):
-        """
-        функция для создания суперпользователя — с ее помощью мы создаем админинстратора
-        это можно сделать с помощью команды createsuperuser
-        """
-
-        user = self.create_user(
-            email,
-            first_name=first_name,
-            last_name=last_name,
-            phone=phone,
-            password=password,
-            role=role
-        )
-        user.is_active = True
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
-
-
 
 
 class User(AbstractBaseUser):
@@ -56,6 +17,7 @@ class User(AbstractBaseUser):
     phone = models.CharField(max_length=15)
     role = models.CharField(max_length=10)
     is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', "role"]

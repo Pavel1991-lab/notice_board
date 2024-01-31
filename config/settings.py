@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from datetime import timedelta
 
+import django.core.mail.backends.smtp
 from dotenv import load_dotenv
 
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework.authtoken',
     'djoser',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -163,13 +165,15 @@ REST_FRAMEWORK = {
 }
 
 
-# AUTH_USER_MODEL = "users_management.UserManage"
+AUTH_USER_MODEL = "users_management.UserManage"
 AUTH_USER_MODEL = "users.User"
 
 
 CORS_ALLOWED_ORIGINS = [
     "https://read-only.example.com",
     "https://read-and-write.example.com",
+    "https://localhost:3080",
+    "https://127.0.0.1:3080"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -195,6 +199,16 @@ DJOSER = {
     'current_user': 'djoser.serializers.UserSerializer',
     'token': 'djoser.serializers.TokenSerializer',
     'token_create': 'djoser.serializers.TokenCreateSerializer',
+    'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
+    # "EMAIL_HOST" : 'smtp.yandex.ru',
+    # "EMAIL_HOST_USER" : 'alexpervosotnikov@yandex.ru',
+    # "EMAIL_HOST_PASSWORD" : "hcawnhfmwbvudfgu",
+    # "EMAIL_PORT" : 465,
+    # "EMAIL_USE_SSL" : True,
+    # "EMAIL_USE_TLS" : False,
+    # "ACCOUNT_EMAIL_UNIQUE" : True,
+    # "ACCOUNT_EMAIL_CONFIRMATION_REQUIRED" : True,
+    # 'SEND_ACTIVATION_EMAIL': True,
 }
 
 
@@ -202,5 +216,29 @@ DJOSER = {
 #     'SERIALIZERS': {
 #         'user_create': 'users.serializers.UserRegistrationSerializer'
 #     },
+#     'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
 #     'LOGIN_FIELD': 'email'
 # }
+
+
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_HOST_USER = 'kaban17091991@yandex.ru'
+# EMAIL_HOST_PASSWORD = 'inhiakuismxemngl'
+# EMAIL_PORT = 465
+# EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = False
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'alexpervosotnikov@yandex.ru'
+EMAIL_HOST_PASSWORD = os.getenv("email_password")
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'alexpervosotnikov@yandex.ru'
+ACCOUNT_EMAIL_UNIQUE = True
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+
+
+
+
+

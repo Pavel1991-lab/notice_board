@@ -4,7 +4,7 @@ from notice.apps import NoticeConfig
 
 
 from notice.views import NoticeCreateAPIView, NoticeListAPIView, NoticeRetrivAPIView, NoticeUpdateAPIView, \
-    NoticeDestroyAPIView
+    NoticeDestroyAPIView, NoticeSearchView
 
 app_name = NoticeConfig.name
 
@@ -14,4 +14,5 @@ urlpatterns = [
    path('<int:pk>/', NoticeRetrivAPIView.as_view(), name='notice-retriv'),
    path('update/<int:pk>/', NoticeUpdateAPIView.as_view(), name='notice-update'),
    path('delete/<int:pk>/', NoticeDestroyAPIView.as_view(), name='notice-delete'),
+   path('search/', NoticeSearchView.as_view(), name='search'),
 ]

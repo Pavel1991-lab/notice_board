@@ -1,10 +1,13 @@
-
+from django_filters.rest_framework import DjangoFilterBackend
+from requests import Response
 from rest_framework import generics
 
 from notice.models import Notice
 from notice.serlizers import NoticeSerlizer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from users.permissions import IsOwnerOrStaff
+
+from notice.filters import NoticeFilter
 
 
 class NoticeCreateAPIView(generics.CreateAPIView):
@@ -22,6 +25,8 @@ class NoticeListAPIView(generics.ListAPIView):
     serializer_class = NoticeSerlizer
     queryset = Notice.objects.all()
     permission_classes = [AllowAny]
+    filter_backends = (DjangoFilterBackend,)  # Подключаем библотеку, отвечающую за фильтрацию к CBV
+    filterset_class = NoticeFilter
 
 
 
@@ -43,4 +48,23 @@ class NoticeUpdateAPIView(generics.UpdateAPIView):
 class NoticeDestroyAPIView(generics.DestroyAPIView):
     queryset = Notice.objects.all()
     permission_classes = [IsOwnerOrStaff]
+
+
+
+class NoticeSearchView(generics.ListAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerlizer
+
+    def post(self, request):
+        title = request.data.get('title', None)
+        if title is not None:
+            queryset = Notice.objects.filter(title__icontains=title)
+            serializer = NoticeSerlizer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({'message': 'Please provide a title'})
+
+
+
+
 
