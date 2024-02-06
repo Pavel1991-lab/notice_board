@@ -1,8 +1,8 @@
 import django_filters
 from notice.models import Notice
 
-
-# Фильтры в Django базируются на основе моделей
+"Фильтр, благодаря нему мы ищем обьявления по названию"
+"http://localhost:8000/notice/?title=баян"
 
 
 class NoticeFilter(django_filters.rest_framework.FilterSet):

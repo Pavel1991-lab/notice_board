@@ -7,7 +7,7 @@ from django.contrib.auth.models import BaseUserManager
 from users.manegement import UserManager
 
 
-# Менеджер должен содержать как минимум две следующие функции
+"Модель для создания юзера"
 
 
 class User(AbstractBaseUser):
@@ -22,7 +22,6 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', "role"]
 
-
     @property
     def is_superuser(self):
         return self.is_admin
@@ -31,15 +30,10 @@ class User(AbstractBaseUser):
     def is_staff(self):
         return self.is_admin
 
-
-
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
     def has_module_perms(self, app_label):
         return self.is_admin
 
-
     objects = UserManager()
-
-

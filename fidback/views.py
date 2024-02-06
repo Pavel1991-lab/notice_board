@@ -6,6 +6,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from users.permissions import IsOwnerOrStaff
 
+"Вьюшки для выполнения механизма CRUD(отзывы)"
+
 
 class FidbackCreateAPIView(generics.CreateAPIView):
     serializer_class = FidbackSerlizer
@@ -17,13 +19,10 @@ class FidbackCreateAPIView(generics.CreateAPIView):
         new_author.save()
 
 
-
-
 class FidbackListAPIView(generics.ListAPIView):
     serializer_class = FidbackSerlizer
     queryset = Fidback.objects.all()
     permission_classes = [IsAuthenticated]
-
 
 
 class FidbackRetrivAPIView(generics.RetrieveAPIView):
@@ -32,16 +31,12 @@ class FidbackRetrivAPIView(generics.RetrieveAPIView):
     permission_classes = [IsOwnerOrStaff]
 
 
-
 class FidbackUpdateAPIView(generics.UpdateAPIView):
     serializer_class = FidbackSerlizer
     queryset = Fidback.objects.all()
     permission_classes = [IsOwnerOrStaff]
 
 
-
-
 class FidbackDestroyAPIView(generics.DestroyAPIView):
     queryset = Fidback.objects.all()
     permission_classes = [IsOwnerOrStaff]
-
