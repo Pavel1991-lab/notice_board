@@ -200,43 +200,20 @@ DJOSER = {
     'token': 'djoser.serializers.TokenSerializer',
     'token_create': 'djoser.serializers.TokenCreateSerializer',
     'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
-    # "EMAIL_HOST" : 'smtp.yandex.ru',
-    # "EMAIL_HOST_USER" : 'alexpervosotnikov@yandex.ru',
-    # "EMAIL_HOST_PASSWORD" : "hcawnhfmwbvudfgu",
-    # "EMAIL_PORT" : 465,
-    # "EMAIL_USE_SSL" : True,
-    # "EMAIL_USE_TLS" : False,
-    # "ACCOUNT_EMAIL_UNIQUE" : True,
-    # "ACCOUNT_EMAIL_CONFIRMATION_REQUIRED" : True,
-    # 'SEND_ACTIVATION_EMAIL': True,
 }
 
 
-# DJOSER = {
-#     'SERIALIZERS': {
-#         'user_create': 'users.serializers.UserRegistrationSerializer'
-#     },
-#     'PASSWORD_RESET_CONFIRM_URL': '/password/reset/confirm/{uid}/{token}',
-#     'LOGIN_FIELD': 'email'
-# }
 
 
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_HOST_USER = 'kaban17091991@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'inhiakuismxemngl'
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True
-# EMAIL_USE_TLS = False
-
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_HOST_USER = 'alexpervosotnikov@yandex.ru'
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("email_password")
-EMAIL_PORT = 465
-EMAIL_USE_SSL = True
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'alexpervosotnikov@yandex.ru'
-ACCOUNT_EMAIL_UNIQUE = True
-ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+ACCOUNT_EMAIL_UNIQUE = os.getenv("ACCOUNT_EMAIL_UNIQUE")
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = os.getenv("ACCOUNT_EMAIL_CONFIRMATION_REQUIRED")
 
 
 
