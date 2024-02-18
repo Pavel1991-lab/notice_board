@@ -1,5 +1,5 @@
 # Папки
-.idea/
+../.idea/
 __pycache__/
 venv/
 env/
