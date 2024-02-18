@@ -1,0 +1,26 @@
+# Папки
+.idea/
+__pycache__/
+venv/
+env/
+env_bak/
+build/
+dist/
+
+# Файлы
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.iml
+.idea_modules/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+*.ipynb_checkpoints/
